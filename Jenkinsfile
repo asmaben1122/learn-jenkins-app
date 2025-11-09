@@ -2,6 +2,17 @@ pipeline {
     agent any
 
     stages {
+        stage('Checkout') {
+            steps {
+                sh '''
+                    echo "=== Files in workspace ==="
+                    ls -la
+                    echo "=== Checking package.json ==="
+                    cat package.json
+                '''
+            }
+        }
+
         stage('Build') {
             agent {
                 docker {
@@ -11,12 +22,18 @@ pipeline {
             }
             steps {
                 sh '''
-                    ls -la
+                    echo "=== Node Version ==="
                     node --version
                     npm --version
+                    
+                    echo "=== Installing Dependencies ==="
                     npm ci
+                    
+                    echo "=== Building Application ==="
                     npm run build
-                    ls -la
+                    
+                    echo "=== Build Complete ==="
+                    ls -la build/
                 '''
             }
         }
@@ -28,9 +45,9 @@ pipeline {
                     reuseNode true
                 }
             }
-
             steps {
                 sh '''
+                    echo "=== Running Tests ==="
                     test -f build/index.html
                     npm test
                 '''
