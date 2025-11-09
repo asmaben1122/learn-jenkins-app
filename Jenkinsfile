@@ -2,24 +2,7 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout') {
-            steps {
-                sh '''
-                    echo "=== Files in workspace ==="
-                    ls -la
-                    echo "=== Checking package.json ==="
-                    cat package.json
-                '''
-            }
-        }
-
         stage('Build') {
-            agent {
-                docker {
-                    image 'node:18-alpine'
-                    reuseNode true
-                }
-            }
             steps {
                 sh '''
                     echo "=== Node Version ==="
@@ -39,12 +22,6 @@ pipeline {
         }
 
         stage('Test') {
-            agent {
-                docker {
-                    image 'node:18-alpine'
-                    reuseNode true
-                }
-            }
             steps {
                 sh '''
                     echo "=== Running Tests ==="
