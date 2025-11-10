@@ -49,11 +49,10 @@
     "titleTemplate": "{classname}-{title}",
     "ancestorSeparator": " › ",
     "usePathForSuiteName": "true"
-  }
+  },
  "scripts": {
   "build": "react-scripts build"
- }
-
+ },
   "jest": {
   "reporters": [
     "default",
