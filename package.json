@@ -54,4 +54,11 @@
   "build": "react-scripts build"
  }
 
+  "jest": {
+  "reporters": [
+    "default",
+    ["jest-junit", { "outputDirectory": "jest-results", "outputName": "junit.xml" }]
+  ]
+}
+
 }
