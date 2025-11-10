@@ -50,4 +50,8 @@
     "ancestorSeparator": " › ",
     "usePathForSuiteName": "true"
   }
+ "scripts": {
+  "build": "react-scripts build"
+ }
+
 }
